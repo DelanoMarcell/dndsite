@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, Outlet, Route, Routes, useLocation } from 'react-router-dom';
+import { siteContact, siteUpdates, siteUpdateSettings } from './content/siteInfo';
 
 const STOCK_IMAGES = {
   hero: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1720&q=80',
@@ -90,6 +91,14 @@ function SiteLayout() {
   const navRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
+  const [carouselIndex, setCarouselIndex] = useState(0);
+  const [carouselTransitionEnabled, setCarouselTransitionEnabled] = useState(true);
+  const activeUpdates = siteUpdateSettings.enabled
+    ? siteUpdates.filter((update) => update && update.message)
+    : [];
+  const rotatingUpdates =
+    activeUpdates.length > 1 ? [...activeUpdates, activeUpdates[0]] : activeUpdates;
+  const activeDotIndex = activeUpdates.length > 0 ? carouselIndex % activeUpdates.length : 0;
 
   useSectionReveal(location.pathname);
 
@@ -98,6 +107,43 @@ function SiteLayout() {
     setProductsOpen(false);
     window.scrollTo(0, 0);
   }, [location.pathname]);
+
+  useEffect(() => {
+    setCarouselIndex(0);
+    setCarouselTransitionEnabled(true);
+  }, [activeUpdates.length]);
+
+  useEffect(() => {
+    if (!siteUpdateSettings.autoRotate || activeUpdates.length < 2) {
+      return undefined;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      if (carouselIndex >= activeUpdates.length) {
+        setCarouselTransitionEnabled(false);
+        setCarouselIndex(0);
+        window.requestAnimationFrame(() => {
+          window.requestAnimationFrame(() => {
+            setCarouselTransitionEnabled(true);
+            setCarouselIndex(1);
+          });
+        });
+        return;
+      }
+
+      setCarouselTransitionEnabled(true);
+      setCarouselIndex((value) => value + 1);
+    }, siteUpdateSettings.intervalMs);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, [
+    activeUpdates.length,
+    carouselIndex,
+    siteUpdateSettings.autoRotate,
+    siteUpdateSettings.intervalMs,
+  ]);
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -131,16 +177,66 @@ function SiteLayout() {
   return (
     <>
       <header className="site-header">
-        <div className="header-meta">
-          <div className="meta-shell">
-            <p>Enterprise AI and software partner</p>
-            <div>
-              <a href="mailto:info@dndsoftware.co.za">info@dndsoftware.co.za</a>
-              <span>•</span>
-              <a href="tel:+1234567890">+1 (234) 567-890</a>
+        {activeUpdates.length > 0 ? (
+          <div className="header-meta">
+            <div className="announcement-bar">
+              <div className="meta-shell announcement-shell">
+                <div className="announcement-viewport" aria-live="polite">
+                  <div
+                    className="announcement-track"
+                    style={{
+                      transform: `translateX(-${carouselIndex * 100}%)`,
+                      transition: carouselTransitionEnabled ? undefined : 'none',
+                    }}
+                  >
+                    {rotatingUpdates.map((update, index) => (
+                      <div className="announcement-slide" key={`${update.id || 'update'}-${index}`}>
+                        <div className="announcement-copy">
+                          {update.tag ? <span className="announcement-tag">{update.tag}</span> : null}
+                          <p>{update.message}</p>
+                        </div>
+
+                        {update.ctaHref && update.ctaLabel ? (
+                          <a
+                            href={update.ctaHref}
+                            className="announcement-link"
+                            target={update.external ? '_blank' : undefined}
+                            rel={update.external ? 'noreferrer noopener' : undefined}
+                          >
+                            {update.ctaLabel}
+                          </a>
+                        ) : null}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {activeUpdates.length > 1 ? (
+                  <div className="announcement-controls" aria-label="Announcement controls">
+                    {activeUpdates.map((update, index) => (
+                      <button
+                        key={update.id || update.message}
+                        type="button"
+                        className={`announcement-dot ${index === activeDotIndex ? 'active' : ''}`}
+                        aria-label={`Show update ${index + 1}`}
+                        aria-current={index === activeDotIndex ? 'true' : undefined}
+                        onClick={() => {
+                          setCarouselTransitionEnabled(false);
+                          setCarouselIndex(index);
+                          window.requestAnimationFrame(() => {
+                            window.requestAnimationFrame(() => {
+                              setCarouselTransitionEnabled(true);
+                            });
+                          });
+                        }}
+                      />
+                    ))}
+                  </div>
+                ) : null}
+              </div>
             </div>
           </div>
-        </div>
+        ) : null}
 
         <div className="header-main" ref={navRef}>
           <Link className="brand" to="/" aria-label="DnD Software home">
@@ -199,13 +295,10 @@ function SiteLayout() {
                   </a>
                 </div>
               </div>
-              <NavLink to="/contact" className={({ isActive }) => navClass(isActive)} onClick={closeMenu}>
-                Contact
-              </NavLink>
             </nav>
 
             <NavLink to="/contact" className="btn btn-primary nav-cta" onClick={closeMenu}>
-              Book a Call
+              Contact Us
             </NavLink>
           </div>
         </div>
@@ -285,10 +378,10 @@ function SiteLayout() {
               <h4>Contact</h4>
               <ul>
                 <li>
-                  <a href="mailto:info@dndsoftware.co.za">info@dndsoftware.co.za</a>
+                  <a href={`mailto:${siteContact.email}`}>{siteContact.email}</a>
                 </li>
                 <li>
-                  <a href="tel:+1234567890">+1 (234) 567-890</a>
+                  <a href={`tel:${siteContact.phoneHref}`}>{siteContact.phoneDisplay}</a>
                 </li>
                 <li>Monday to Friday</li>
                 <li>Global remote delivery</li>
@@ -722,11 +815,11 @@ function ContactPanel() {
       </div>
 
       <div className="contact-panel-actions">
-        <a href="mailto:info@dndsoftware.co.za" className="btn btn-primary">
-          info@dndsoftware.co.za
+        <a href={`mailto:${siteContact.email}`} className="btn btn-primary">
+          {siteContact.email}
         </a>
-        <a href="tel:+1234567890" className="btn btn-secondary">
-          +1 (234) 567-890
+        <a href={`tel:${siteContact.phoneHref}`} className="btn btn-secondary">
+          {siteContact.phoneDisplay}
         </a>
       </div>
     </section>
@@ -753,11 +846,11 @@ function ContactPage() {
             <ul>
               <li>
                 <span>Email</span>
-                <a href="mailto:info@dndsoftware.co.za">info@dndsoftware.co.za</a>
+                <a href={`mailto:${siteContact.email}`}>{siteContact.email}</a>
               </li>
               <li>
                 <span>Phone</span>
-                <a href="tel:+1234567890">+1 (234) 567-890</a>
+                <a href={`tel:${siteContact.phoneHref}`}>{siteContact.phoneDisplay}</a>
               </li>
               <li>
                 <span>Availability</span>
