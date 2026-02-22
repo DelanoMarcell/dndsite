@@ -46,6 +46,11 @@ The UI should communicate delivery confidence, not startup hype. It should look 
 - Headlines, labels, tables, timelines, and rows do most of the design work.
 - Typography and spacing carry the premium look.
 
+6. `Signature diamond grid`
+- The site uses a subtle diagonal diamond grid as a recurring brand texture.
+- This grid should be applied once as the main page background layer (continuous across the page).
+- The grid is part of the identity, not a temporary effect.
+
 ## Brand tokens (source of truth)
 Use the tokens in `src/style.css` as the canonical values.
 
@@ -61,6 +66,14 @@ Use the tokens in `src/style.css` as the canonical values.
 - `--color-muted-2: #667085`
 - `--color-border: #d8dee6`
 - `--color-border-soft: #e5e7eb`
+- `--rule-major: rgba(207, 216, 227, 0.92)`
+- `--rule-minor: rgba(216, 222, 230, 0.58)`
+- `--grid-pattern-line: rgba(229, 231, 235, 0.58)`
+
+### Grid texture tokens
+- `--grid-pattern-size: 100px` desktop
+- `--grid-pattern-size: 72px` mobile
+- Pattern style: two diagonal lines (45deg and -45deg) to form diamonds
 
 ### Typography
 - Headings: `Montserrat`
@@ -129,6 +142,28 @@ Footer should feel like an enterprise information hub, not a marketing banner.
 - Current pattern: `section-reveal` with soft fade/translate.
 - No bouncy, playful, or overly kinetic animations.
 
+## Signature grid implementation rules
+Use this exact strategy for performance and consistency:
+
+1. Implement grid as a single static CSS background on the main page canvas (`body`).
+2. Use diagonal gradient pair to create the diamond pattern.
+3. Never use `background-attachment: fixed` for grid layers.
+4. Never use animated stars/particles on top of the grid.
+5. No JavaScript-driven parallax for the grid.
+6. Keep contrast low so content readability remains primary.
+7. Do not apply separate per-section grid overlays.
+
+The goal is near-zero perceptible performance impact during scroll.
+
+## Separator system (with global grid)
+To avoid horizontal rules clashing with the diamond background:
+
+1. Use `faded separators` instead of hard full-width 1px lines.
+2. Use `major` separators for section boundaries (`--rule-major`).
+3. Use `minor` separators for rows/tables/internal structure (`--rule-minor`).
+4. Prefer gradient-based rules that fade near left/right edges.
+5. Keep vertical separators subtle and secondary to horizontal rhythm.
+
 ## Content and tone rules
 Use copy that is:
 
@@ -154,6 +189,8 @@ Avoid:
 3. Do not replace typography with generic system stacks.
 4. Do not add playful startup-style blobs/shapes/stickers/emoji UI.
 5. Do not introduce rounded, soft consumer-app styling across the site.
+6. Do not add star overlays or twinkle animations to the grid pattern.
+7. Do not use fixed-attachment backgrounds for grid textures.
 
 ## Expansion playbook for future features
 When adding a new page/feature:
@@ -181,4 +218,3 @@ Before considering a new UI change complete:
 Use this exact direction when prompting:
 
 `Use the Structured Enterprise Grid direction from design_direction.md. Keep DnD Software brand colors and typography. Prefer divider- and row-based enterprise layouts over cards. Maintain a clean, detailed, professional B2B consultancy aesthetic with restrained accents and disciplined hierarchy.`
-
