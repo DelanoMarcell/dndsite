@@ -89,11 +89,13 @@ function SiteLayout() {
   const location = useLocation();
   const navRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
 
   useSectionReveal(location.pathname);
 
   useEffect(() => {
     setMenuOpen(false);
+    setProductsOpen(false);
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
@@ -101,12 +103,14 @@ function SiteLayout() {
     const handleOutsideClick = (event) => {
       if (!navRef.current?.contains(event.target)) {
         setMenuOpen(false);
+        setProductsOpen(false);
       }
     };
 
     const handleEscape = (event) => {
       if (event.key === 'Escape') {
         setMenuOpen(false);
+        setProductsOpen(false);
       }
     };
 
@@ -119,7 +123,10 @@ function SiteLayout() {
     };
   }, []);
 
-  const closeMenu = () => setMenuOpen(false);
+  const closeMenu = () => {
+    setMenuOpen(false);
+    setProductsOpen(false);
+  };
 
   return (
     <>
@@ -128,7 +135,7 @@ function SiteLayout() {
           <div className="meta-shell">
             <p>Enterprise AI and software partner</p>
             <div>
-              <a href="mailto:info@dndsoftware.com">info@dndsoftware.com</a>
+              <a href="mailto:info@dndsoftware.co.za">info@dndsoftware.co.za</a>
               <span>•</span>
               <a href="tel:+1234567890">+1 (234) 567-890</a>
             </div>
@@ -167,15 +174,31 @@ function SiteLayout() {
               <NavLink to="/services" className={({ isActive }) => navClass(isActive)} onClick={closeMenu}>
                 Services
               </NavLink>
-              <a
-                href="https://chatbotz.co.za"
-                target="_blank"
-                rel="noreferrer noopener"
-                className="nav-link"
-                onClick={closeMenu}
-              >
-                Product
-              </a>
+              <div className={`nav-dropdown ${productsOpen ? 'open' : ''}`}>
+                <button
+                  type="button"
+                  className="nav-link nav-dropdown-trigger"
+                  aria-expanded={productsOpen}
+                  aria-controls="products-dropdown"
+                  onClick={() => setProductsOpen((value) => !value)}
+                >
+                  Products
+                  <span className="nav-caret" aria-hidden="true">
+                    ▾
+                  </span>
+                </button>
+                <div id="products-dropdown" className="nav-dropdown-menu">
+                  <a
+                    href="https://chatbotz.co.za"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="nav-dropdown-item"
+                    onClick={closeMenu}
+                  >
+                    Chatbotz Platform
+                  </a>
+                </div>
+              </div>
               <NavLink to="/contact" className={({ isActive }) => navClass(isActive)} onClick={closeMenu}>
                 Contact
               </NavLink>
@@ -262,7 +285,7 @@ function SiteLayout() {
               <h4>Contact</h4>
               <ul>
                 <li>
-                  <a href="mailto:info@dndsoftware.com">info@dndsoftware.com</a>
+                  <a href="mailto:info@dndsoftware.co.za">info@dndsoftware.co.za</a>
                 </li>
                 <li>
                   <a href="tel:+1234567890">+1 (234) 567-890</a>
@@ -699,8 +722,8 @@ function ContactPanel() {
       </div>
 
       <div className="contact-panel-actions">
-        <a href="mailto:info@dndsoftware.com" className="btn btn-primary">
-          info@dndsoftware.com
+        <a href="mailto:info@dndsoftware.co.za" className="btn btn-primary">
+          info@dndsoftware.co.za
         </a>
         <a href="tel:+1234567890" className="btn btn-secondary">
           +1 (234) 567-890
@@ -730,7 +753,7 @@ function ContactPage() {
             <ul>
               <li>
                 <span>Email</span>
-                <a href="mailto:info@dndsoftware.com">info@dndsoftware.com</a>
+                <a href="mailto:info@dndsoftware.co.za">info@dndsoftware.co.za</a>
               </li>
               <li>
                 <span>Phone</span>
