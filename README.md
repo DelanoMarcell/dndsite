@@ -31,10 +31,18 @@ npm run dev
 
 ```bash
 npm run build
+```
+
+Build output is generated to `out/` (static export).
+
+To preview the exported static site locally:
+
+```bash
 npm run start
 ```
 
 ## Notes
 
 - This migration intentionally focuses on framework transition and parity.
+- The project is configured for static export (`output: 'export'`).
 - SEO-specific enhancements can be added in a dedicated follow-up phase.

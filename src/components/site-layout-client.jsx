@@ -59,16 +59,30 @@ function navClass(isActive) {
   return `nav-link${isActive ? ' active' : ''}`;
 }
 
+function normalizePath(path) {
+  if (!path || path === '/') {
+    return '/';
+  }
+
+  return path.endsWith('/') ? path.slice(0, -1) : path;
+}
+
 function isActivePath(pathname, href, { includeChildren = false } = {}) {
-  if (href === '/') {
-    return pathname === '/';
+  const normalizedPathname = normalizePath(pathname);
+  const normalizedHref = normalizePath(href);
+
+  if (normalizedHref === '/') {
+    return normalizedPathname === '/';
   }
 
   if (includeChildren) {
-    return pathname === href || pathname.startsWith(`${href}/`);
+    return (
+      normalizedPathname === normalizedHref ||
+      normalizedPathname.startsWith(`${normalizedHref}/`)
+    );
   }
 
-  return pathname === href;
+  return normalizedPathname === normalizedHref;
 }
 
 function isExternalHref(href) {
@@ -98,10 +112,12 @@ function AnnouncementAction({ update }) {
 export default function SiteLayoutClient({ children }) {
   const pathname = usePathname() || '/';
   const navRef = useRef(null);
+  const footerRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [carouselTransitionEnabled, setCarouselTransitionEnabled] = useState(true);
+  const [isFooterVisible, setIsFooterVisible] = useState(false);
 
   const activeUpdates = siteUpdateSettings.enabled
     ? siteUpdates.filter((update) => update && update.message)
@@ -179,6 +195,36 @@ export default function SiteLayoutClient({ children }) {
     };
   }, []);
 
+  useEffect(() => {
+    document.body.classList.toggle('has-bottom-sticky-updates', activeUpdates.length > 0);
+
+    return () => {
+      document.body.classList.remove('has-bottom-sticky-updates');
+    };
+  }, [activeUpdates.length]);
+
+  useEffect(() => {
+    const footerNode = footerRef.current;
+    if (!footerNode) {
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        setIsFooterVisible(Boolean(entry?.isIntersecting));
+      },
+      { threshold: 0.02 }
+    );
+
+    observer.observe(footerNode);
+
+    return () => {
+      observer.disconnect();
+      setIsFooterVisible(false);
+    };
+  }, [pathname]);
+
   const closeMenu = () => {
     setMenuOpen(false);
     setProductsOpen(false);
@@ -187,64 +233,12 @@ export default function SiteLayoutClient({ children }) {
   return (
     <>
       <header className="site-header">
-        {activeUpdates.length > 0 ? (
-          <div className="header-meta">
-            <div className="announcement-bar">
-              <div className="meta-shell announcement-shell">
-                <div className="announcement-viewport" aria-live="polite">
-                  <div
-                    className="announcement-track"
-                    style={{
-                      transform: `translateX(-${carouselIndex * 100}%)`,
-                      transition: carouselTransitionEnabled ? undefined : 'none',
-                    }}
-                  >
-                    {rotatingUpdates.map((update, index) => (
-                      <div className="announcement-slide" key={`${update.id || 'update'}-${index}`}>
-                        <div className="announcement-copy">
-                          {update.tag ? <span className="announcement-tag">{update.tag}</span> : null}
-                          <p>{update.message}</p>
-                        </div>
-
-                        <AnnouncementAction update={update} />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {activeUpdates.length > 1 ? (
-                  <div className="announcement-controls" aria-label="Announcement controls">
-                    {activeUpdates.map((update, index) => (
-                      <button
-                        key={update.id || update.message}
-                        type="button"
-                        className={`announcement-dot ${index === activeDotIndex ? 'active' : ''}`}
-                        aria-label={`Show update ${index + 1}`}
-                        aria-current={index === activeDotIndex ? 'true' : undefined}
-                        onClick={() => {
-                          setCarouselTransitionEnabled(false);
-                          setCarouselIndex(index);
-                          window.requestAnimationFrame(() => {
-                            window.requestAnimationFrame(() => {
-                              setCarouselTransitionEnabled(true);
-                            });
-                          });
-                        }}
-                      />
-                    ))}
-                  </div>
-                ) : null}
-              </div>
-            </div>
-          </div>
-        ) : null}
-
         <div className="header-main" ref={navRef}>
           <Link className="brand" href="/" aria-label="DnD Software home">
             <img src="/assets/logo_500px_500px_black.svg" alt="DnD Software logo" />
             <div className="brand-copy">
               <strong>DnD Software</strong>
-              <span>AI Consulting and Product Engineering</span>
+              <span>AI and Software Consulting</span>
             </div>
           </Link>
 
@@ -324,7 +318,61 @@ export default function SiteLayoutClient({ children }) {
 
       <main className="site-main">{children}</main>
 
-      <footer className="site-footer">
+      {activeUpdates.length > 0 ? (
+        <div
+          className={`header-meta header-meta-bottom-sticky${isFooterVisible ? ' on-footer' : ''}`}
+        >
+          <div className="announcement-bar">
+            <div className="meta-shell announcement-shell">
+              <div className="announcement-viewport" aria-live="polite">
+                <div
+                  className="announcement-track"
+                  style={{
+                    transform: `translateX(-${carouselIndex * 100}%)`,
+                    transition: carouselTransitionEnabled ? undefined : 'none',
+                  }}
+                >
+                  {rotatingUpdates.map((update, index) => (
+                    <div className="announcement-slide" key={`${update.id || 'update'}-${index}`}>
+                      <div className="announcement-copy">
+                        {update.tag ? <span className="announcement-tag">{update.tag}</span> : null}
+                        <p>{update.message}</p>
+                      </div>
+
+                      <AnnouncementAction update={update} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {activeUpdates.length > 1 ? (
+                <div className="announcement-controls" aria-label="Announcement controls">
+                  {activeUpdates.map((update, index) => (
+                    <button
+                      key={update.id || update.message}
+                      type="button"
+                      className={`announcement-dot ${index === activeDotIndex ? 'active' : ''}`}
+                      aria-label={`Show update ${index + 1}`}
+                      aria-current={index === activeDotIndex ? 'true' : undefined}
+                      onClick={() => {
+                        setCarouselTransitionEnabled(false);
+                        setCarouselIndex(index);
+                        window.requestAnimationFrame(() => {
+                          window.requestAnimationFrame(() => {
+                            setCarouselTransitionEnabled(true);
+                          });
+                        });
+                      }}
+                    />
+                  ))}
+                </div>
+              ) : null}
+            </div>
+          </div>
+        </div>
+      ) : null}
+
+      <footer className="site-footer" ref={footerRef}>
         <div className="footer-shell">
           <div className="footer-callout">
             <div>

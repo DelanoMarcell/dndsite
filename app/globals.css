@@ -122,6 +122,60 @@ ul {
   color: rgb(255 255 255 / 0.84);
 }
 
+.header-meta-bottom-sticky {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 95;
+}
+
+.header-meta-bottom-sticky .announcement-bar {
+  border-top: 1px solid rgb(255 255 255 / 0.14);
+  border-bottom: none;
+  box-shadow: 0 -8px 20px rgb(2 6 23 / 0.28);
+}
+
+.header-meta-bottom-sticky.on-footer {
+  color: var(--color-text);
+}
+
+.header-meta-bottom-sticky.on-footer .announcement-bar {
+  background: #f8fafc;
+  border-top: 1px solid var(--color-border-soft);
+  border-bottom: none;
+  box-shadow: 0 -8px 20px rgb(15 23 42 / 0.12);
+}
+
+.header-meta-bottom-sticky.on-footer .announcement-shell p {
+  color: var(--color-text);
+}
+
+.header-meta-bottom-sticky.on-footer .announcement-tag {
+  border-color: var(--color-border);
+  color: var(--color-navy);
+}
+
+.header-meta-bottom-sticky.on-footer .announcement-link {
+  border-color: var(--color-border);
+  color: var(--color-navy);
+  background: #fff;
+}
+
+.header-meta-bottom-sticky.on-footer .announcement-link:hover {
+  color: var(--color-primary-dark);
+  border-color: var(--color-primary);
+  background: rgb(231 110 80 / 0.12);
+}
+
+.header-meta-bottom-sticky.on-footer .announcement-dot {
+  border-color: rgb(71 84 103 / 0.52);
+}
+
+.has-bottom-sticky-updates .site-footer {
+  padding-bottom: 3.2rem;
+}
+
 .announcement-bar {
   background: var(--color-navy);
   border-bottom: 1px solid rgb(255 255 255 / 0.14);
@@ -248,7 +302,7 @@ ul {
 .header-main {
   width: min(1240px, 95vw);
   margin: 0 auto;
-  min-height: 5.4rem;
+  min-height: 6.15rem;
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
@@ -264,11 +318,12 @@ ul {
 }
 
 .brand img {
-  width: 3rem;
-  height: 3rem;
-  border: 1px solid var(--color-border-soft);
-  background: #fff;
-  padding: 0.2rem;
+  width: 5.45rem;
+  height: 5.45rem;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: -0.34rem 0;
 }
 
 .brand-copy {
@@ -1279,6 +1334,10 @@ ul {
 }
 
 @media (max-width: 860px) {
+  .has-bottom-sticky-updates .site-footer {
+    padding-bottom: 5.5rem;
+  }
+
   .menu-toggle {
     display: inline-block;
   }
@@ -1286,6 +1345,13 @@ ul {
   .header-main {
     grid-template-columns: auto auto;
     position: relative;
+    min-height: 5.1rem;
+  }
+
+  .brand img {
+    width: 4.2rem;
+    height: 4.2rem;
+    margin: -0.2rem 0;
   }
 
   .nav-panel {
@@ -1419,6 +1485,10 @@ ul {
 }
 
 @media (max-width: 760px) {
+  .has-bottom-sticky-updates .site-footer {
+    padding-bottom: 6.1rem;
+  }
+
   :root {
     --grid-pattern-size: 72px;
   }

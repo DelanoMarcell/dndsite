@@ -13,14 +13,15 @@ export const siteUpdates = [
     ctaHref: 'https://chatbotz.co.za',
     external: true,
   },
-  {
-    id: 'aws-partnership',
-    tag: 'Company News',
-    message: 'DnD Software has partnered with AWS to accelerate enterprise AI delivery and cloud modernization.',
-    ctaLabel: 'Read the Update',
-    ctaHref: '/about',
-    external: false,
-  },
+  // {
+  //   id: 'aws-partnership',
+  //   tag: 'Company News',
+  //   message:
+  //     'DnD Software has partnered with AWS to accelerate enterprise AI delivery and cloud modernization.',
+  //   ctaLabel: 'Read the Update',
+  //   ctaHref: '/about',
+  //   external: false,
+  // },
   {
     id: 'chatbotz-promo',
     tag: 'Limited Offer',
@@ -29,10 +30,10 @@ export const siteUpdates = [
     ctaHref: 'https://chatbotz.co.za',
     external: true,
   },
-  {
-    id: 'implementation-window',
-    message: 'New implementation window opened for next-month AI and software delivery programs.',
-  },
+  // {
+  //   id: 'implementation-window',
+  //   message: 'New implementation window opened for next-month AI and software delivery programs.',
+  // },
 ];
 
 // Add more entries to siteUpdates to rotate announcements in the top bar.
