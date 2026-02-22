@@ -1,12 +1,12 @@
-# DnD Main Site (React + Vite)
+# DnD Main Site (Next.js)
 
-Route-based multi-page React website for DnD Software.
+Multi-page company website for DnD Software, migrated from React + Vite to Next.js App Router.
 
-## Brand continuity from Astro project
+## Stack
 
-- Colors: `#e76e50`, `#1e293b`, `#0f172a`, plus existing neutral grays/white.
-- Typography: Montserrat (headings), Open Sans (body), Oswald (accent labels).
-- Logos/assets copied from `/mnt/c/Users/Delan/desktop/dnd` into `public/assets`.
+- Next.js (App Router)
+- React
+- Global CSS design system carried over from the previous implementation
 
 ## Routes
 
@@ -17,17 +17,24 @@ Route-based multi-page React website for DnD Software.
 - `/services/consulting`
 - `/services/software`
 - `/contact`
+- `/privacy-policy`
+- `/terms`
 
-## Run locally
+## Development
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Build
+## Production
 
 ```bash
 npm run build
-npm run preview
+npm run start
 ```
+
+## Notes
+
+- This migration intentionally focuses on framework transition and parity.
+- SEO-specific enhancements can be added in a dedicated follow-up phase.
