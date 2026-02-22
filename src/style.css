@@ -81,10 +81,34 @@ ul {
   margin: 0;
 }
 
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3.2rem;
+  z-index: 120;
+  border: 1px solid var(--color-border);
+  background: #fff;
+  color: var(--color-text);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.55rem 0.75rem;
+  text-decoration: none;
+  transition: top 150ms ease;
+}
+
+.skip-link:focus-visible {
+  top: 0.65rem;
+}
+
 .site-main {
   width: min(1200px, 92vw);
   margin: 0 auto;
   padding: 2.5rem 0 5rem;
+  scroll-margin-top: 6rem;
+}
+
+.site-main:focus {
+  outline: none;
 }
 
 .site-header {
