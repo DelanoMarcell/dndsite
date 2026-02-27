@@ -69,59 +69,64 @@ export function HomePage() {
 
       <section className="section section-reveal">
         <header className="section-head">
-          <p className="eyebrow">Delivery Framework</p>
-          <h2>How we execute engagements</h2>
+          <p className="eyebrow">Our Approach</p>
+          <h2>Every engagement follows the same discipline.</h2>
+          <p>Three commitments we make to every client.</p>
         </header>
 
-        <div className="execution-rows">
-          <article>
+        <div className="approach-grid">
+          <article className="approach-card">
             <span>01</span>
-            <div>
-              <h3>Assess</h3>
-              <p>Clarify business objectives, technical constraints, and measurable success metrics.</p>
-            </div>
+            <h3>Scope to outcomes, not hours</h3>
+            <p>We agree on what success looks like before any work begins. Every milestone ties to a result your business cares about — not a list of features no one asked for.</p>
           </article>
-          <article>
+          <article className="approach-card">
             <span>02</span>
-            <div>
-              <h3>Design</h3>
-              <p>Define architecture, operating model, governance controls, and rollout approach.</p>
-            </div>
+            <h3>Build in the open</h3>
+            <p>You see working software regularly, not just at the end. Progress, risks, and every major decision are shared as they happen — no black boxes, no surprises.</p>
           </article>
-          <article>
+          <article className="approach-card">
             <span>03</span>
-            <div>
-              <h3>Implement</h3>
-              <p>Deliver in accountable milestones with regular demonstrations and risk visibility.</p>
-            </div>
-          </article>
-          <article>
-            <span>04</span>
-            <div>
-              <h3>Scale</h3>
-              <p>Support adoption, optimize performance, and expand scope based on measured outcomes.</p>
-            </div>
+            <h3>Leave you stronger</h3>
+            <p>We build systems your team can own and operate without us. That means clear documentation, knowledge transfer, and decisions designed for the long term.</p>
           </article>
         </div>
       </section>
 
       <section className="section section-reveal">
-        <div className="feature-split">
+        <div className="feature-split why-us-split">
           <div className="feature-media">
             <img src={STOCK_IMAGES.operations} alt="Operations command center" />
           </div>
           <div className="feature-copy">
             <p className="eyebrow">Why Us</p>
-            <h2>Built for teams that need predictable delivery, not experimentation theatre.</h2>
+            <h2>Proven delivery without enterprise overhead.</h2>
             <p>
-              Our engagements are structured around business outcomes, operating constraints,
-              compliance expectations, and adoption support.
+              You should not need a global-consultancy budget to ship quality software. We keep
+              teams lean, timelines short, and every engagement tailored to your business context.
             </p>
-            <ul>
-              <li>Clear ownership model for delivery and governance</li>
-              <li>Documentation and handover for internal teams</li>
-              <li>Roadmap continuity beyond initial deployment</li>
-            </ul>
+            <div className="why-us-grid">
+              <article className="why-us-card">
+                <span>01</span>
+                <h3>Affordable by design</h3>
+                <p>Senior-level delivery with no enterprise price tag and no bloated consultancy overhead.</p>
+              </article>
+              <article className="why-us-card">
+                <span>02</span>
+                <h3>Fast to meaningful output</h3>
+                <p>Weeks to first delivery, not months of discovery. We move quickly without cutting corners on quality.</p>
+              </article>
+              <article className="why-us-card">
+                <span>03</span>
+                <h3>Personalized to your project</h3>
+                <p>A dedicated team that understands your business, not a rotating bench of unfamiliar faces.</p>
+              </article>
+              <article className="why-us-card">
+                <span>04</span>
+                <h3>Industry experience that matters</h3>
+                <p>Hands-on delivery across AI, cloud platforms, and enterprise operations reduces ramp-up risk.</p>
+              </article>
+            </div>
           </div>
         </div>
       </section>
