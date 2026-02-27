@@ -281,7 +281,11 @@ export default function SiteLayoutClient({ children }) {
               >
                 About
               </Link>
-              <div className={`nav-dropdown ${servicesOpen ? 'open' : ''}`}>
+              <div
+                className={`nav-dropdown ${servicesOpen ? 'open' : ''}`}
+                onMouseEnter={() => { if (!menuOpen) { setServicesOpen(true); setProductsOpen(false); } }}
+                onMouseLeave={() => { if (!menuOpen) setServicesOpen(false); }}
+              >
                 <button
                   type="button"
                   className={`nav-link nav-dropdown-trigger${
@@ -312,7 +316,11 @@ export default function SiteLayoutClient({ children }) {
                   ))}
                 </div>
               </div>
-              <div className={`nav-dropdown ${productsOpen ? 'open' : ''}`}>
+              <div
+                className={`nav-dropdown ${productsOpen ? 'open' : ''}`}
+                onMouseEnter={() => { if (!menuOpen) { setProductsOpen(true); setServicesOpen(false); } }}
+                onMouseLeave={() => { if (!menuOpen) setProductsOpen(false); }}
+              >
                 <button
                   type="button"
                   className="nav-link nav-dropdown-trigger"
@@ -485,9 +493,6 @@ export default function SiteLayoutClient({ children }) {
               <ul>
                 <li>
                   <a href={`mailto:${siteContact.email}`}>{siteContact.email}</a>
-                </li>
-                <li>
-                  <a href={`tel:${siteContact.phoneHref}`}>{siteContact.phoneDisplay}</a>
                 </li>
                 <li>Monday to Friday</li>
                 <li>Global remote delivery</li>

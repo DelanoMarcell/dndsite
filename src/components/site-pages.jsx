@@ -19,9 +19,6 @@ function ContactPanel() {
         <a href={`mailto:${siteContact.email}`} className="btn btn-primary">
           {siteContact.email}
         </a>
-        <a href={`tel:${siteContact.phoneHref}`} className="btn btn-secondary">
-          {siteContact.phoneDisplay}
-        </a>
       </div>
     </section>
   );
@@ -126,6 +123,9 @@ export function HomePage() {
                 <h3>Industry experience that matters</h3>
                 <p>Hands-on delivery across AI, cloud platforms, and enterprise operations reduces ramp-up risk.</p>
               </article>
+            </div>
+            <div className="why-us-footer">
+              <Link href="/about" className="why-us-link">Read more about us &rarr;</Link>
             </div>
           </div>
         </div>
@@ -409,10 +409,6 @@ export function ContactPage() {
               <li>
                 <span>Email</span>
                 <a href={`mailto:${siteContact.email}`}>{siteContact.email}</a>
-              </li>
-              <li>
-                <span>Phone</span>
-                <a href={`tel:${siteContact.phoneHref}`}>{siteContact.phoneDisplay}</a>
               </li>
               <li>
                 <span>Availability</span>

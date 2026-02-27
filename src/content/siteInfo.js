@@ -49,6 +49,4 @@ export const siteUpdates = [
 
 export const siteContact = {
   email: 'info@dndsoftware.co.za',
-  phoneDisplay: '+1 (234) 567-890',
-  phoneHref: '+1234567890',
 };
