@@ -95,22 +95,39 @@ export function HomePage() {
       </section>
 
       <section className="section section-reveal">
-        <div className="feature-split">
+        <div className="feature-split why-us-split">
           <div className="feature-media">
             <img src={STOCK_IMAGES.operations} alt="Operations command center" />
           </div>
           <div className="feature-copy">
             <p className="eyebrow">Why Us</p>
-            <h2>Built for teams that need predictable delivery, not experimentation theatre.</h2>
+            <h2>Proven delivery without enterprise overhead.</h2>
             <p>
-              Our engagements are structured around business outcomes, operating constraints,
-              compliance expectations, and adoption support.
+              You should not need a global-consultancy budget to ship quality software. We keep
+              teams lean, timelines short, and every engagement tailored to your business context.
             </p>
-            <ul>
-              <li>Clear ownership model for delivery and governance</li>
-              <li>Documentation and handover for internal teams</li>
-              <li>Roadmap continuity beyond initial deployment</li>
-            </ul>
+            <div className="why-us-grid">
+              <article className="why-us-card">
+                <span>01</span>
+                <h3>Affordable by design</h3>
+                <p>Senior-level delivery with no enterprise price tag and no bloated consultancy overhead.</p>
+              </article>
+              <article className="why-us-card">
+                <span>02</span>
+                <h3>Fast to meaningful output</h3>
+                <p>Weeks to first delivery, not months of discovery. We move quickly without cutting corners on quality.</p>
+              </article>
+              <article className="why-us-card">
+                <span>03</span>
+                <h3>Personalized to your project</h3>
+                <p>A dedicated team that understands your business, not a rotating bench of unfamiliar faces.</p>
+              </article>
+              <article className="why-us-card">
+                <span>04</span>
+                <h3>Industry experience that matters</h3>
+                <p>Hands-on delivery across AI, cloud platforms, and enterprise operations reduces ramp-up risk.</p>
+              </article>
+            </div>
           </div>
         </div>
       </section>
