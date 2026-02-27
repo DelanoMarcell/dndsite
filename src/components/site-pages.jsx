@@ -33,60 +33,21 @@ export function HomePage() {
       <section className="home-hero section-reveal">
         <div className="hero-copy">
           <p className="eyebrow">DnD Software</p>
-          <h1>Enterprise AI and software delivery with accountability at every milestone.</h1>
+          <h1>AI and software solutions built for business outcomes.</h1>
           <p>
-            We partner with leadership and technical teams to plan, build, and operate reliable
-            AI-enabled systems that improve operations and customer experience.
+            We provide end-to-end AI and software consulting, from strategy and architecture to
+            implementation and continuous improvement.
           </p>
           <div className="hero-actions">
             <Link href="/contact" className="btn btn-primary">
               Book a strategy call
             </Link>
-            <Link href="/services" className="btn btn-secondary">
-              View services
-            </Link>
           </div>
-          <ul className="hero-notes">
-            <li>Advisory and implementation under one team</li>
-            <li>Structured milestone delivery with executive visibility</li>
-            <li>Post-launch optimization and support</li>
-          </ul>
         </div>
 
         <div className="hero-image">
           <img src={STOCK_IMAGES.hero} alt="Enterprise team in strategy workshop" />
         </div>
-      </section>
-
-      <section className="proof-strip section-reveal" aria-label="Delivery proof points">
-        <article>
-          <span>Delivery Model</span>
-          <strong>Strategy to production</strong>
-        </article>
-        <article>
-          <span>Engagement Flexibility</span>
-          <strong>Advisory, build, and managed support</strong>
-        </article>
-        <article>
-          <span>Coverage</span>
-          <strong>AI systems and product engineering</strong>
-        </article>
-        <article>
-          <span>Operating Focus</span>
-          <strong>Reliability, governance, measurable outcomes</strong>
-        </article>
-      </section>
-
-      <section className="client-strip section-reveal" aria-label="Industries">
-        <p>Working across operationally complex industries:</p>
-        <ul>
-          <li>Financial Services</li>
-          <li>Professional Services</li>
-          <li>Logistics</li>
-          <li>Healthcare</li>
-          <li>Property & Facilities</li>
-          <li>E-commerce</li>
-        </ul>
       </section>
 
       <section className="section section-reveal">
@@ -151,7 +112,7 @@ export function HomePage() {
             <img src={STOCK_IMAGES.operations} alt="Operations command center" />
           </div>
           <div className="feature-copy">
-            <p className="eyebrow">Operational Excellence</p>
+            <p className="eyebrow">Why Us</p>
             <h2>Built for teams that need predictable delivery, not experimentation theatre.</h2>
             <p>
               Our engagements are structured around business outcomes, operating constraints,
@@ -346,9 +307,6 @@ export function ServiceDetailPage({ eyebrow, title, summary, image, outcomes, de
           <div className="hero-actions">
             <Link href="/contact" className="btn btn-primary">
               Discuss this service
-            </Link>
-            <Link href="/services" className="btn btn-secondary">
-              Back to all services
             </Link>
           </div>
         </div>

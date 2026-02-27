@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { siteContact, siteUpdates, siteUpdateSettings } from '../content/siteInfo';
+import { SERVICES } from '../content/siteData';
 
 function LinkedInIcon() {
   return (
@@ -114,14 +115,17 @@ export default function SiteLayoutClient({ children }) {
   const navRef = useRef(null);
   const footerRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [carouselTransitionEnabled, setCarouselTransitionEnabled] = useState(true);
   const [isFooterVisible, setIsFooterVisible] = useState(false);
+  const [isUpdatesDismissed, setIsUpdatesDismissed] = useState(false);
 
   const activeUpdates = siteUpdateSettings.enabled
     ? siteUpdates.filter((update) => update && update.message)
     : [];
+  const showUpdatesBar = activeUpdates.length > 0 && !isUpdatesDismissed;
   const rotatingUpdates =
     activeUpdates.length > 1 ? [...activeUpdates, activeUpdates[0]] : activeUpdates;
   const activeDotIndex = activeUpdates.length > 0 ? carouselIndex % activeUpdates.length : 0;
@@ -130,6 +134,7 @@ export default function SiteLayoutClient({ children }) {
 
   useEffect(() => {
     setMenuOpen(false);
+    setServicesOpen(false);
     setProductsOpen(false);
     window.scrollTo(0, 0);
   }, [pathname]);
@@ -140,7 +145,7 @@ export default function SiteLayoutClient({ children }) {
   }, [activeUpdates.length]);
 
   useEffect(() => {
-    if (!siteUpdateSettings.autoRotate || activeUpdates.length < 2) {
+    if (!showUpdatesBar || !siteUpdateSettings.autoRotate || activeUpdates.length < 2) {
       return undefined;
     }
 
@@ -167,6 +172,7 @@ export default function SiteLayoutClient({ children }) {
   }, [
     activeUpdates.length,
     carouselIndex,
+    showUpdatesBar,
     siteUpdateSettings.autoRotate,
     siteUpdateSettings.intervalMs,
   ]);
@@ -175,6 +181,7 @@ export default function SiteLayoutClient({ children }) {
     const handleOutsideClick = (event) => {
       if (!navRef.current?.contains(event.target)) {
         setMenuOpen(false);
+        setServicesOpen(false);
         setProductsOpen(false);
       }
     };
@@ -182,6 +189,7 @@ export default function SiteLayoutClient({ children }) {
     const handleEscape = (event) => {
       if (event.key === 'Escape') {
         setMenuOpen(false);
+        setServicesOpen(false);
         setProductsOpen(false);
       }
     };
@@ -196,12 +204,12 @@ export default function SiteLayoutClient({ children }) {
   }, []);
 
   useEffect(() => {
-    document.body.classList.toggle('has-bottom-sticky-updates', activeUpdates.length > 0);
+    document.body.classList.toggle('has-bottom-sticky-updates', showUpdatesBar);
 
     return () => {
       document.body.classList.remove('has-bottom-sticky-updates');
     };
-  }, [activeUpdates.length]);
+  }, [showUpdatesBar]);
 
   useEffect(() => {
     const footerNode = footerRef.current;
@@ -227,6 +235,7 @@ export default function SiteLayoutClient({ children }) {
 
   const closeMenu = () => {
     setMenuOpen(false);
+    setServicesOpen(false);
     setProductsOpen(false);
   };
 
@@ -272,23 +281,47 @@ export default function SiteLayoutClient({ children }) {
               >
                 About
               </Link>
-              <Link
-                href="/services"
-                className={navClass(isActivePath(pathname, '/services', { includeChildren: true }))}
-                aria-current={
-                  isActivePath(pathname, '/services', { includeChildren: true }) ? 'page' : undefined
-                }
-                onClick={closeMenu}
-              >
-                Services
-              </Link>
+              <div className={`nav-dropdown ${servicesOpen ? 'open' : ''}`}>
+                <button
+                  type="button"
+                  className={`nav-link nav-dropdown-trigger${
+                    isActivePath(pathname, '/services', { includeChildren: true }) ? ' active' : ''
+                  }`}
+                  aria-expanded={servicesOpen}
+                  aria-controls="services-dropdown"
+                  onClick={() => {
+                    setServicesOpen((value) => !value);
+                    setProductsOpen(false);
+                  }}
+                >
+                  Services
+                  <span className="nav-caret" aria-hidden="true">
+                    ▾
+                  </span>
+                </button>
+                <div id="services-dropdown" className="nav-dropdown-menu">
+                  {SERVICES.map((service) => (
+                    <Link
+                      key={service.id}
+                      href={service.href}
+                      className="nav-dropdown-item"
+                      onClick={closeMenu}
+                    >
+                      {service.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
               <div className={`nav-dropdown ${productsOpen ? 'open' : ''}`}>
                 <button
                   type="button"
                   className="nav-link nav-dropdown-trigger"
                   aria-expanded={productsOpen}
                   aria-controls="products-dropdown"
-                  onClick={() => setProductsOpen((value) => !value)}
+                  onClick={() => {
+                    setProductsOpen((value) => !value);
+                    setServicesOpen(false);
+                  }}
                 >
                   Products
                   <span className="nav-caret" aria-hidden="true">
@@ -318,12 +351,21 @@ export default function SiteLayoutClient({ children }) {
 
       <main className="site-main">{children}</main>
 
-      {activeUpdates.length > 0 ? (
+      {showUpdatesBar ? (
         <div
           className={`header-meta header-meta-bottom-sticky${isFooterVisible ? ' on-footer' : ''}`}
         >
           <div className="announcement-bar">
             <div className="meta-shell announcement-shell">
+              <button
+                type="button"
+                className="announcement-dismiss"
+                aria-label="Dismiss updates"
+                onClick={() => setIsUpdatesDismissed(true)}
+              >
+                ×
+              </button>
+
               <div className="announcement-viewport" aria-live="polite">
                 <div
                   className="announcement-track"
