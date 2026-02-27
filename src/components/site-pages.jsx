@@ -70,38 +70,26 @@ export function HomePage() {
 
       <section className="section section-reveal">
         <header className="section-head">
-          <p className="eyebrow">Delivery Framework</p>
-          <h2>How we execute engagements</h2>
+          <p className="eyebrow">Our Approach</p>
+          <h2>Every engagement follows the same discipline.</h2>
+          <p>Three commitments we make to every client.</p>
         </header>
 
-        <div className="execution-rows">
-          <article>
+        <div className="approach-grid">
+          <article className="approach-card">
             <span>01</span>
-            <div>
-              <h3>Assess</h3>
-              <p>Clarify business objectives, technical constraints, and measurable success metrics.</p>
-            </div>
+            <h3>Scope to outcomes, not hours</h3>
+            <p>We agree on what success looks like before any work begins. Every milestone ties to a result your business cares about — not a list of features no one asked for.</p>
           </article>
-          <article>
+          <article className="approach-card">
             <span>02</span>
-            <div>
-              <h3>Design</h3>
-              <p>Define architecture, operating model, governance controls, and rollout approach.</p>
-            </div>
+            <h3>Build in the open</h3>
+            <p>You see working software regularly, not just at the end. Progress, risks, and every major decision are shared as they happen — no black boxes, no surprises.</p>
           </article>
-          <article>
+          <article className="approach-card">
             <span>03</span>
-            <div>
-              <h3>Implement</h3>
-              <p>Deliver in accountable milestones with regular demonstrations and risk visibility.</p>
-            </div>
-          </article>
-          <article>
-            <span>04</span>
-            <div>
-              <h3>Scale</h3>
-              <p>Support adoption, optimize performance, and expand scope based on measured outcomes.</p>
-            </div>
+            <h3>Leave you stronger</h3>
+            <p>We build systems your team can own and operate without us. That means clear documentation, knowledge transfer, and decisions designed for the long term.</p>
           </article>
         </div>
       </section>
