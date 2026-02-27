@@ -61,7 +61,6 @@ export function HomePage() {
             <article key={service.id} className="service-list-row">
               <h3>{service.name}</h3>
               <p>{service.focus}</p>
-              <p>{service.deliverables}</p>
               <Link href={service.href}>View details</Link>
             </article>
           ))}

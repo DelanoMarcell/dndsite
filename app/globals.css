@@ -811,7 +811,7 @@ ul {
 .service-list-row {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(180px, 1fr) 1.2fr 1.25fr auto;
+  grid-template-columns: minmax(180px, 1fr) 1.6fr auto;
   gap: 1rem;
   align-items: start;
   padding: 1.15rem 0;
@@ -1308,7 +1308,6 @@ ul {
     grid-template-columns: 1fr 1fr;
   }
 
-  .service-list-row p:last-of-type,
   .service-list-row a {
     grid-column: 1 / -1;
   }
