@@ -51,7 +51,6 @@ body {
     );
   background-size: var(--grid-pattern-size) var(--grid-pattern-size);
   background-position: center top;
-  line-height: 1.65;
 }
 
 img {
@@ -256,7 +255,6 @@ ul {
   font-size: 0.77rem;
   font-weight: 600;
   color: rgb(255 255 255 / 0.95);
-  line-height: 1.35;
 }
 
 .announcement-link {
@@ -290,7 +288,6 @@ ul {
   background: transparent;
   color: inherit;
   padding: 0;
-  line-height: 1;
 }
 
 .announcement-dismiss:focus-visible {
@@ -347,7 +344,6 @@ ul {
 .brand-copy strong {
   text-transform: uppercase;
   font-size: 0.92rem;
-  line-height: 1;
   letter-spacing: 0.1em;
 }
 
@@ -409,7 +405,6 @@ ul {
 
 .nav-dropdown-trigger .nav-caret {
   font-size: 0.8em;
-  line-height: 1;
   transition: transform 180ms ease;
 }
 
@@ -644,7 +639,6 @@ ul {
 .detail-copy h1 {
   margin-top: 0.75rem;
   font-size: clamp(2rem, 4.2vw, 3.15rem);
-  line-height: 1.03;
   max-width: 18ch;
 }
 
@@ -743,7 +737,6 @@ ul {
   display: block;
   margin-top: 0.36rem;
   font-size: 0.98rem;
-  line-height: 1.35;
 }
 
 .client-strip {
@@ -857,6 +850,42 @@ ul {
   text-decoration: underline;
 }
 
+.service-example-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.service-example-card {
+  border: 1px solid var(--color-border-soft);
+  background: #f8fafc;
+  padding: 0.95rem 1rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.service-example-card h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #334155;
+}
+
+.service-example-card p {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.accent-link {
+  color: var(--color-primary);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.accent-link:hover {
+  text-decoration: underline;
+}
+
 .execution-rows {
   display: grid;
   background: linear-gradient(
@@ -961,7 +990,6 @@ ul {
 .approach-card p {
   margin-top: 0;
   color: var(--color-muted);
-  line-height: 1.65;
 }
 
 .why-us-grid {
@@ -999,7 +1027,6 @@ ul {
   margin: 0;
   color: var(--color-muted);
   font-size: 0.9rem;
-  line-height: 1.6;
 }
 
 @media (max-width: 768px) {
@@ -1010,6 +1037,10 @@ ul {
 
 @media (max-width: 768px) {
   .approach-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-example-grid {
     grid-template-columns: 1fr;
   }
 }
@@ -1060,14 +1091,12 @@ ul {
 
 .why-us-card h3 {
   font-size: 0.98rem;
-  line-height: 1.3;
   min-height: 2.6em;
 }
 
 .why-us-card p {
   margin-top: 0;
   color: var(--color-muted);
-  line-height: 1.55;
 }
 
 .table-wrap {
@@ -1629,7 +1658,6 @@ ul {
     color: rgb(255 255 255 / 0.9);
     font-size: 0.84rem;
     font-weight: 600;
-    line-height: 1;
     cursor: pointer;
     border-radius: 999px;
     padding: 0;
@@ -1681,7 +1709,6 @@ ul {
 
   .announcement-shell p {
     font-size: 0.74rem;
-    line-height: 1.28;
     max-width: 48ch;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -1771,7 +1798,6 @@ ul {
 
   .announcement-shell p {
     font-size: 0.7rem;
-    line-height: 1.24;
   }
 
   .announcement-link {

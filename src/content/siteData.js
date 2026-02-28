@@ -35,41 +35,54 @@ export const SERVICES = [
 export const SERVICE_DETAILS = {
   'generative-ai': {
     eyebrow: 'Generative AI & Agents',
-    title: 'Deploy intelligent assistants and workflows grounded in your business data',
+    title: 'Deploy intelligent agents and workflows',
     summary:
-      'We design and operationalize AI systems that retrieve trusted information, complete multi-step tasks, and integrate with the platforms your teams already use.',
+      'We design and operationalise AI systems that retrieve trusted information, complete multi-step tasks, and integrate with the platforms your teams already use.',
     image: STOCK_IMAGES.generative,
-    outcomes: [
-      'Reduced repetitive manual effort across core workflows',
-      'Higher consistency in internal and customer support responses',
-      'Faster decision support with role-specific AI copilots',
+    examples: [
+      {
+        title: 'Internal and customer-facing chatbots',
+        detail:
+          'Internal chatbots help teams with company policies and internal process guidance, while external chatbots handle client interactions with accurate, business-approved responses.',
+      },
+      {
+        title: 'Knowledge retrieval systems',
+        detail: 'Search and answer systems connected to documents, SOPs, and internal content.',
+      },
+      {
+        title: 'Workflow automations',
+        detail: 'Agentic workflows where AI can take actions across systems to complete multi-step business tasks.',
+      },
+      {
+        title: 'Evaluation and guardrails',
+        detail: 'Safety, quality, and monitoring setups for more reliable production usage.',
+      },
     ],
-    deliverables: [
-      'Knowledge integration and RAG architecture design',
-      'Agent workflow orchestration and control patterns',
-      'Evaluation methodology, guardrails, and observability setup',
-      'Operational governance and handover documentation',
-    ],
-    stack: ['OpenAI', 'Anthropic', 'Google', 'LangChain', 'n8n', 'Vector Databases'],
   },
   consulting: {
     eyebrow: 'AI Consulting & Strategy',
     title: 'Build a practical AI roadmap with clear priorities and measurable value',
     summary:
-      'We work with leadership teams to identify high-impact use cases, align stakeholders, and define an executable plan for implementation and adoption.',
+      'We partner with you to make AI adoption less overwhelming, guiding strategy, execution, and change management in one coordinated approach.',
     image: STOCK_IMAGES.consulting,
-    outcomes: [
-      'Clear prioritization of near-term and long-term AI opportunities',
-      'Reduced delivery risk through staged rollout planning',
-      'Improved alignment between business and technical teams',
+    examples: [
+      {
+        title: 'Opportunity assessments',
+        detail: 'Structured evaluations of where AI can create measurable value in your operations.',
+      },
+      {
+        title: 'Use-case prioritisation',
+        detail: 'Ranking initiatives by impact, effort, and practical feasibility.',
+      },
+      {
+        title: 'Implementation roadmaps',
+        detail: 'Phased plans that move from pilot to production with clear milestones.',
+      },
+      {
+        title: 'Governance and risk',
+        detail: 'Policies and controls for responsible adoption, compliance, and quality.',
+      },
     ],
-    deliverables: [
-      'Readiness assessment and opportunity discovery',
-      'Business value modeling and initiative ranking',
-      'Governance, risk, and compliance framework recommendations',
-      'Delivery roadmap and change management plan',
-    ],
-    stack: ['Roadmapping', 'Governance', 'Risk Management', 'Change Enablement'],
   },
   software: {
     eyebrow: 'Software Development',
@@ -77,17 +90,23 @@ export const SERVICE_DETAILS = {
     summary:
       'From custom applications to integrated ecosystems, we build and modernize systems that are maintainable, scalable, and aligned to business-critical operations.',
     image: STOCK_IMAGES.software,
-    outcomes: [
-      'Modernized systems with improved scalability and resilience',
-      'Better operational visibility through integrated platforms',
-      'Faster delivery cycles supported by robust engineering practices',
+    examples: [
+      {
+        title: 'Applications',
+        detail: 'Custom web, mobile, and desktop applications with secure authentication, workflow logic, and backend integration.',
+      },
+      {
+        title: 'API services',
+        detail: 'API design and integration across internal and third-party systems, including auth, validation, and monitoring.',
+      },
+      {
+        title: 'Automation',
+        detail: 'Business process automation using event-driven workflows, system triggers, and reliable task orchestration.',
+      },
+      {
+        title: 'Platform modernisation',
+        detail: 'Modernisation of legacy platforms to improve performance, reliability, maintainability, and deployment readiness.',
+      },
     ],
-    deliverables: [
-      'Custom web and platform application development',
-      'Systems integration and API orchestration',
-      'Cloud architecture and deployment enablement',
-      'Performance, reliability, and security hardening',
-    ],
-    stack: ['React', 'Node.js', 'Python', 'AWS', 'Docker', 'PostgreSQL', 'GraphQL'],
   },
 };

@@ -6,6 +6,11 @@ import { usePathname } from 'next/navigation';
 import { siteContact, siteUpdates, siteUpdateSettings } from '../content/siteInfo';
 import { SERVICES } from '../content/siteData';
 
+const basePath =
+  process.env.NEXT_PUBLIC_BASE_PATH && process.env.NEXT_PUBLIC_BASE_PATH !== '/'
+    ? `/${process.env.NEXT_PUBLIC_BASE_PATH.replace(/^\/+|\/+$/g, '')}`
+    : '';
+
 function LinkedInIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -244,7 +249,7 @@ export default function SiteLayoutClient({ children }) {
       <header className="site-header">
         <div className="header-main" ref={navRef}>
           <Link className="brand" href="/" aria-label="DnD Software home">
-            <img src="/assets/logo_500px_500px_black.svg" alt="DnD Software logo" />
+            <img src={`${basePath}/assets/logo_500px_500px_black.svg`} alt="DnD Software logo" />
             <div className="brand-copy">
               <strong>DnD Software</strong>
               <span>AI and Software Consulting</span>
@@ -428,14 +433,18 @@ export default function SiteLayoutClient({ children }) {
 
           <div className="footer-grid">
             <div className="footer-brand">
-              <img src="/assets/logo_500px_500px_white.svg" alt="DnD Software" className="footer-logo" />
+              <img
+                src={`${basePath}/assets/logo_500px_500px_white.svg`}
+                alt="DnD Software"
+                className="footer-logo"
+              />
               <p>
                 DnD Software delivers enterprise AI and custom software solutions with strong
                 planning, accountable delivery, and long-term support.
               </p>
               <div className="footer-social">
                 <a
-                  href="https://linkedin.com/company/dndsoftware"
+                  href="https://linkedin.com/company/dnd-software"
                   target="_blank"
                   rel="noreferrer noopener"
                   aria-label="LinkedIn"
@@ -486,11 +495,7 @@ export default function SiteLayoutClient({ children }) {
                 <li>
                   <a href={`mailto:${siteContact.email}`}>{siteContact.email}</a>
                 </li>
-                <li>
-                  <a href={`tel:${siteContact.phoneHref}`}>{siteContact.phoneDisplay}</a>
-                </li>
                 <li>Monday to Friday</li>
-                <li>Global remote delivery</li>
               </ul>
             </div>
           </div>

@@ -3,30 +3,6 @@ import ContactForm from './contact-form';
 import { siteContact } from '../content/siteInfo';
 import { SERVICES, STOCK_IMAGES } from '../content/siteData';
 
-function ContactPanel() {
-  return (
-    <section className="contact-panel section-reveal">
-      <div>
-        <p className="eyebrow">Contact</p>
-        <h2>Plan your next AI or software initiative with DnD Software.</h2>
-        <p>
-          Share your priorities and timeline. We will respond with practical next steps and a
-          recommended engagement structure.
-        </p>
-      </div>
-
-      <div className="contact-panel-actions">
-        <a href={`mailto:${siteContact.email}`} className="btn btn-primary">
-          {siteContact.email}
-        </a>
-        <a href={`tel:${siteContact.phoneHref}`} className="btn btn-secondary">
-          {siteContact.phoneDisplay}
-        </a>
-      </div>
-    </section>
-  );
-}
-
 export function HomePage() {
   return (
     <>
@@ -131,7 +107,6 @@ export function HomePage() {
         </div>
       </section>
 
-      <ContactPanel />
     </>
   );
 }
@@ -139,29 +114,40 @@ export function HomePage() {
 export function AboutPage() {
   return (
     <>
-      <section className="page-hero section-reveal">
-        <p className="eyebrow">About DnD Software</p>
-        <h1>A delivery-focused technology partner for ambitious organizations.</h1>
-        <p>
-          We combine advisory rigor and implementation capability to help companies modernize
-          operations through software engineering and practical AI adoption.
-        </p>
+      <section className="section section-reveal">
+        <div className="feature-split">
+          <div className="feature-media">
+            <img src={STOCK_IMAGES.consulting} alt="Modern office building exterior" />
+          </div>
+          <div className="feature-copy">
+            <p className="eyebrow">About DnD Software</p>
+            <h1>A reliable partner for high-quality AI and software implementation.</h1>
+            <p>
+              We are an AI-first firm that helps organisations implement relevant, practical
+              solutions aligned with what actually works in their operations, without the buzz or
+              hype.
+            </p>
+          </div>
+        </div>
       </section>
 
       <section className="section section-reveal">
         <div className="feature-split">
           <div className="feature-copy">
             <p className="eyebrow">Who We Are</p>
-            <h2>Cross-functional teams that understand business, technology, and execution risk.</h2>
+            <h2>A knowledgeable team delivering results you can trust with fast, cost-efficient execution.</h2>
             <p>
-              DnD Software works with decision-makers and delivery teams to align initiatives with
-              measurable outcomes and long-term maintainability.
+              Founded by early-career engineers and consultants, we bring a fresh perspective to
+              practical, high-impact delivery. Building in South Africa has shown us how often
+              teams are held back by tight budgets, infrastructure gaps, and limited access to
+              modern tools, and that reality shapes how we work.
+              {' '}
+              <Link href="/contact" className="accent-link">
+                Book a call
+              </Link>
+              {' '}
+              and see for yourself.
             </p>
-            <ul>
-              <li>Executive-ready communication and reporting</li>
-              <li>Engineering decisions tied to operational impact</li>
-              <li>Pragmatic rollout planning with adoption support</li>
-            </ul>
           </div>
           <div className="feature-media">
             <img src={STOCK_IMAGES.about} alt="Professional consulting session" />
@@ -169,62 +155,6 @@ export function AboutPage() {
         </div>
       </section>
 
-      <section className="section section-reveal">
-        <header className="section-head">
-          <p className="eyebrow">Operating Principles</p>
-          <h2>What clients can expect during every engagement</h2>
-        </header>
-
-        <div className="execution-rows">
-          <article>
-            <span>01</span>
-            <div>
-              <h3>Outcome-first planning</h3>
-              <p>Scope is always tied to business impact, not just technical output.</p>
-            </div>
-          </article>
-          <article>
-            <span>02</span>
-            <div>
-              <h3>Engineering quality</h3>
-              <p>Solutions are built for stability, security, and long-term maintainability.</p>
-            </div>
-          </article>
-          <article>
-            <span>03</span>
-            <div>
-              <h3>Delivery transparency</h3>
-              <p>Stakeholders receive clear progress updates, risks, and tradeoff decisions.</p>
-            </div>
-          </article>
-          <article>
-            <span>04</span>
-            <div>
-              <h3>Continuous improvement</h3>
-              <p>Support continues post-launch through optimization and roadmap extension.</p>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section className="section section-reveal">
-        <div className="two-col-table">
-          <div>
-            <h3>What sets DnD Software apart</h3>
-            <p>Balanced advisory and implementation capability under one accountable team.</p>
-          </div>
-          <div>
-            <ul>
-              <li>Business-aligned AI strategy and execution</li>
-              <li>Custom software delivery for core operations</li>
-              <li>Governance-minded systems architecture</li>
-              <li>Long-term partnership model</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <ContactPanel />
     </>
   );
 }
@@ -295,12 +225,11 @@ export function ServicesPage() {
         </div>
       </section>
 
-      <ContactPanel />
     </>
   );
 }
 
-export function ServiceDetailPage({ eyebrow, title, summary, image, outcomes, deliverables, stack }) {
+export function ServiceDetailPage({ eyebrow, title, summary, image, examples }) {
   return (
     <>
       <section className="detail-hero section-reveal">
@@ -310,7 +239,7 @@ export function ServiceDetailPage({ eyebrow, title, summary, image, outcomes, de
           <p>{summary}</p>
           <div className="hero-actions">
             <Link href="/contact" className="btn btn-primary">
-              Discuss this service
+              Get in touch
             </Link>
           </div>
         </div>
@@ -320,70 +249,19 @@ export function ServiceDetailPage({ eyebrow, title, summary, image, outcomes, de
       </section>
 
       <section className="section section-reveal">
-        <div className="two-col-table">
-          <div>
-            <h3>Business outcomes</h3>
-            <ul>
-              {outcomes.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3>Scope of delivery</h3>
-            <ul>
-              {deliverables.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </div>
+        <div className="section-head">
+          <h2>Solution Areas</h2>
         </div>
-      </section>
-
-      <section className="section section-reveal">
-        <header className="section-head">
-          <p className="eyebrow">Typical Program Structure</p>
-          <h2>Execution phases</h2>
-        </header>
-
-        <div className="phase-grid">
-          <article>
-            <span>01</span>
-            <h3>Discovery</h3>
-            <p>Requirements mapping and scope alignment.</p>
-          </article>
-          <article>
-            <span>02</span>
-            <h3>Architecture</h3>
-            <p>Solution design, controls, and integration planning.</p>
-          </article>
-          <article>
-            <span>03</span>
-            <h3>Delivery</h3>
-            <p>Build and validation in milestone increments.</p>
-          </article>
-          <article>
-            <span>04</span>
-            <h3>Operate</h3>
-            <p>Enablement, monitoring, and continuous optimization.</p>
-          </article>
-        </div>
-      </section>
-
-      <section className="section section-reveal">
-        <header className="section-head">
-          <p className="eyebrow">Technology Familiarity</p>
-          <h2>Platforms and tools we work with</h2>
-        </header>
-
-        <div className="stack-list" aria-label="Technology stack">
-          {stack.map((item) => (
-            <span key={item}>{item}</span>
+        <div className="service-example-grid">
+          {examples.map((item) => (
+            <article key={item.title} className="service-example-card">
+              <h3>{item.title}</h3>
+              <p>{item.detail}</p>
+            </article>
           ))}
         </div>
       </section>
 
-      <ContactPanel />
     </>
   );
 }
@@ -395,7 +273,7 @@ export function ContactPage() {
         <p className="eyebrow">Contact</p>
         <h1>Speak with our team about your project goals.</h1>
         <p>
-          We help organizations scope initiatives clearly and move from planning to delivery with
+          We help organisations scope initiatives clearly and move from planning to delivery with
           confidence.
         </p>
       </section>
@@ -411,16 +289,8 @@ export function ContactPage() {
                 <a href={`mailto:${siteContact.email}`}>{siteContact.email}</a>
               </li>
               <li>
-                <span>Phone</span>
-                <a href={`tel:${siteContact.phoneHref}`}>{siteContact.phoneDisplay}</a>
-              </li>
-              <li>
                 <span>Availability</span>
                 <p>Monday to Friday, standard business hours</p>
-              </li>
-              <li>
-                <span>Delivery</span>
-                <p>Remote-first engagement across global teams</p>
               </li>
             </ul>
           </div>
