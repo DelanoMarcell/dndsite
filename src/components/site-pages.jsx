@@ -103,6 +103,9 @@ export function HomePage() {
                 <p>Hands-on delivery across AI, cloud platforms, and enterprise operations reduces ramp-up risk.</p>
               </article>
             </div>
+            <div className="why-us-footer">
+              <Link href="/about" className="why-us-link">Read more about us &rarr;</Link>
+            </div>
           </div>
         </div>
       </section>

@@ -414,7 +414,7 @@ ul {
 
 .nav-dropdown-menu {
   position: absolute;
-  top: calc(100% + 0.4rem);
+  top: 100%;
   left: 0;
   min-width: 13rem;
   background: #fff;
@@ -425,6 +425,7 @@ ul {
   pointer-events: none;
   transition: opacity 180ms ease, transform 180ms ease;
   z-index: 30;
+  padding-top: 0.4rem;
 }
 
 .nav-dropdown.open .nav-dropdown-menu {
@@ -1027,6 +1028,23 @@ ul {
   margin: 0;
   color: var(--color-muted);
   font-size: 0.9rem;
+}
+
+.why-us-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.25rem;
+}
+
+.why-us-link {
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+
+.why-us-link:hover {
+  text-decoration: underline;
 }
 
 @media (max-width: 768px) {
